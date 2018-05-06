@@ -30,10 +30,12 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs depr
 
 SOURCES += \
         main.cpp \
-        weight_ctrl_dlg.cpp
+        weight_ctrl_dlg.cpp \
+    serial_interface.cpp
 
 HEADERS += \
-        weight_ctrl_dlg.h
+        weight_ctrl_dlg.h \
+    serial_interface.h
 
 FORMS += \
         weight_ctrl_dlg.ui
