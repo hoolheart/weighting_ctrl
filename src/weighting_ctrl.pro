@@ -9,6 +9,9 @@ QT       += core gui widgets serialport
 TARGET = weighting_ctrl
 TEMPLATE = app
 CONFIG(debug, debug|release): TARGET = $${TARGET}d
+macx {
+CONFIG -= app_bundle
+}
 
 DESTDIR = ../bin
 MOC_DIR = ../gen/$$TARGET
@@ -29,13 +32,14 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs depr
 
 
 SOURCES += \
-        main.cpp \
-        weight_ctrl_dlg.cpp \
+    main.cpp \
+    weight_ctrl_dlg.cpp \
     serial_interface.cpp
 
 HEADERS += \
-        weight_ctrl_dlg.h \
-    serial_interface.h
+    weight_ctrl_dlg.h \
+    serial_interface.h \
+    data_structure.h
 
 FORMS += \
-        weight_ctrl_dlg.ui
+    weight_ctrl_dlg.ui

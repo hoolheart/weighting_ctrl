@@ -2,6 +2,7 @@
 #define SERIAL_INTERFACE_H
 
 #include <QObject>
+#include "data_structure.h"
 
 class SerialInterface : public QObject
 {
