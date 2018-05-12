@@ -6,6 +6,9 @@
 #include <QByteArray>
 #include <QDateTime>
 
+#define CONTROL_COMMAND_LEN 10
+#define RECEIVE_MESSAGE_LEN 14
+
 /** configuration of serial port */
 class SerialConf {
 public:
@@ -75,7 +78,7 @@ public:
      * @brief serialize control command into byte arrays
      * @param data --- pointer of byte array
      */
-    void serializeToByteArray(unsigned char *data) {
+    void serializeToByteArray(unsigned char *data) const {
         data[0] = 0xa5;//head
         data[1] = nodeIndex;//node index
         data[2] = 0x5;//data length
