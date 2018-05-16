@@ -34,12 +34,17 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs depr
 SOURCES += \
     main.cpp \
     weight_ctrl_dlg.cpp \
-    serial_interface.cpp
+    serial_interface.cpp \
+    color_led.cpp
 
 HEADERS += \
     weight_ctrl_dlg.h \
     serial_interface.h \
-    data_structure.h
+    data_structure.h \
+    color_led.h
 
 FORMS += \
     weight_ctrl_dlg.ui
+
+RESOURCES += \
+    res.qrc
