@@ -68,6 +68,19 @@ public:
     /** clear all pending messages */
     void clearPendingMessage();
 
+    /**
+     * @brief interprete parity setting to string
+     * @param parity --- parity setting
+     * @return readable string
+     */
+    static QString interpreteParity(int parity);
+    /**
+     * @brief interprete stop bit setting to string
+     * @param stop_bit --- stop bit setting
+     * @return readable string
+     */
+    static QString interpreteStopBit(int stop_bit);
+
 signals:
     /** signal emitted when a new message received */
     void messageReceived();

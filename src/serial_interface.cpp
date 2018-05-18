@@ -147,6 +147,38 @@ void SerialInterface::clearPendingMessage()
     messages.clear();//clear list
 }
 
+QString SerialInterface::interpreteParity(int parity)
+{
+    switch (parity) {
+    case QSerialPort::NoParity:
+        return tr("no parity");
+    case QSerialPort::EvenParity:
+        return tr("even parity");
+    case QSerialPort::OddParity:
+        return tr("odd parity");
+    case QSerialPort::SpaceParity:
+        return tr("space parity");
+    case QSerialPort::MarkParity:
+        return tr("mark parity");
+    default:
+        return tr("Invalid parity setting");
+    }
+}
+
+QString SerialInterface::interpreteStopBit(int stop_bit)
+{
+    switch (stop_bit) {
+    case QSerialPort::OneStop:
+        return "1";
+    case QSerialPort::OneAndHalfStop:
+        return "1.5";
+    case QSerialPort::TwoStop:
+        return "2";
+    default:
+        return tr("Invalid stop bit setting");
+    }
+}
+
 void SerialInterface::onDataAvailable()
 {
     static unsigned char ch = 0;//prepare char
