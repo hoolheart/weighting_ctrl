@@ -12,6 +12,7 @@ CONFIG(debug, debug|release): TARGET = $${TARGET}d
 macx {
 CONFIG -= app_bundle
 }
+VERSION = 1.0.0
 
 DESTDIR = ../bin
 MOC_DIR = ../gen/$$TARGET
@@ -35,16 +36,24 @@ SOURCES += \
     main.cpp \
     weight_ctrl_dlg.cpp \
     serial_interface.cpp \
-    color_led.cpp
+    color_led.cpp \
+    config_dlg.cpp \
+    calibration_dlg.cpp
 
 HEADERS += \
     weight_ctrl_dlg.h \
     serial_interface.h \
     data_structure.h \
-    color_led.h
+    color_led.h \
+    config_dlg.h \
+    calibration_dlg.h
 
 FORMS += \
-    weight_ctrl_dlg.ui
+    weight_ctrl_dlg.ui \
+    config_dlg.ui \
+    calibration_dlg.ui
 
 RESOURCES += \
     res.qrc
+
+TRANSLATIONS = weight_ctrl.ts

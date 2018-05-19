@@ -38,7 +38,7 @@ class ControlCommand {
 private:
     unsigned char nodeIndex;/**< node index the command is sending to */
     unsigned char funcCode;/**< functionality code */
-    qint32 weight;/**< calibration weight, unit: g */
+    qint32 weight;/**< calibration weight, unit: 0.01g */
 
 public:
     /** empty constructor */
@@ -47,7 +47,7 @@ public:
      * constructor with settings of all fields
      * @param node_index --- node index (0-254)
      * @param func_code --- functionality code
-     * @param weight_g --- calibration weight, unit: g
+     * @param weight_g --- calibration weight, unit: 0.01g
      */
     ControlCommand(unsigned char node_index, unsigned char func_code, qint32 weight_g = 0):
         nodeIndex(node_index),funcCode(func_code),weight(weight_g) {}
@@ -68,7 +68,7 @@ public:
     }
     /**
      * @brief set calibration weight
-     * @param value --- calibration weight, unit: g
+     * @param value --- calibration weight, unit: 0.01g
      */
     void setWeight(qint32 value) {
         weight = value;

@@ -274,7 +274,7 @@ void SerialInterface::checkStatus()
             err = tr("Bytes written to serial port are more than sent commands");//fill error
             emit serialPortError(err);//emit signal
         }
-        else if(bytesToWrite>1000) {
+        else if(bytesToWrite>100) {
             //too many pending bytes
             err = tr("Too many pending bytes (%1) to write, the serial port may has been down").arg(bytesToWrite);//fill error
             emit serialPortError(err);//emit signal
