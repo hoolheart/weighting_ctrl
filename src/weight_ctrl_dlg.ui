@@ -7,17 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>355</height>
+    <height>326</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Digital Pressure Sensor Calibration System</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="spacing">
+    <number>20</number>
+   </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,3,0,2,0,2">
        <item>
         <widget class="QLabel" name="label">
          <property name="styleSheet">
@@ -30,6 +33,12 @@
        </item>
        <item>
         <widget class="QLCDNumber" name="lcdWeight">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>350</width>
@@ -62,6 +71,12 @@
        </item>
        <item>
         <widget class="QLCDNumber" name="lcdAD">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -94,6 +109,12 @@
        </item>
        <item>
         <widget class="QLCDNumber" name="lcdNode">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -120,20 +141,14 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="labelLogo">
-         <property name="maximumSize">
-          <size>
-           <width>350</width>
-           <height>50</height>
-          </size>
-         </property>
          <property name="text">
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="res.qrc">:/logo/res/logo_origin.jpg</pixmap>
+          <pixmap resource="res.qrc">:/logo/res/logo.png</pixmap>
          </property>
-         <property name="scaledContents">
-          <bool>true</bool>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>

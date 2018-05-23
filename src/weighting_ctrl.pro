@@ -18,6 +18,7 @@ DESTDIR = ../bin
 MOC_DIR = ../gen/$$TARGET
 UI_DIR = ../gen/$$TARGET
 OBJECTS_DIR = ../gen/$$TARGET
+RCC_DIR = ../gen/$$TARGET
 INCLUDEPATH += ./
 
 # The following define makes your compiler emit warnings if you use
