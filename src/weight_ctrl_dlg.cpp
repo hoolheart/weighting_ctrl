@@ -19,6 +19,9 @@ WeightCtrlDlg::WeightCtrlDlg(QWidget *parent) :
     srl = new SerialInterface(this);//create serial port interface
     cmd.reset(new ControlCommand());//create control command
 
+    connect(srl,SIGNAL(messageReceived()),this,SLOT(onMessageReceived()));//trigger message process
+    connect(srl,SIGNAL(serialPortError(QString)),this,SLOT(onPortError(QString)));//trigger error process
+
     QSettings setting;//prepare setting
     ctrlNode = (unsigned char)setting.value("device/node-index",1).toInt();//get control node from setting
     ui->spinNode->setValue(ctrlNode);//initialize node spinbox with control node index
@@ -207,7 +210,7 @@ void WeightCtrlDlg::reset()
 {
     //prepare command
     cmd->setNodeIndex(ctrlNode);//node index
-    cmd->setFuncCode(0x00);//func code
+    cmd->setFuncCode(0x02);//func code
     //try control
     if(!srl->sendCommand(cmd)) {
         QMessageBox::warning(this,windowTitle(),tr("Failed to reset data:\n%1").arg(srl->lastError()));//pump error
@@ -294,9 +297,11 @@ void WeightCtrlDlg::onCalibration(int point, double weight)
     //prepare command
     cmd->setNodeIndex(ctrlNode);//node index
     cmd->setFuncCode((unsigned char)(4+point));//func code
-    cmd->setWeight((qint32)qRound(weight/0.01));//weight
+    cmd->setWeight((qint32)qRound(weight));//weight
     //try control
     if(!srl->sendCommand(cmd)) {
         QMessageBox::warning(this,windowTitle(),tr("Failed to calibrate:\n%1").arg(srl->lastError()));//pump error
     }
+    //clear weight
+    cmd->setWeight(0);
 }
