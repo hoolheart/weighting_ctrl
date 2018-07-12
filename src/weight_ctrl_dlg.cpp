@@ -37,7 +37,7 @@ WeightCtrlDlg::WeightCtrlDlg(QWidget *parent) :
     ui->comboPort->addItems(port_name_list);//set context of port combo
     QString port_name;//prepare port name
     if(port_name_list.size()>0) {
-        port_name = setting.value("port/name",port_name_list[0]).toString();//get initial port name
+        port_name = setting.value("port/name",QString()).toString();//get initial port name
         if(!port_name_list.contains(port_name)) {//invalid setting
             port_name = port_name_list[0];//use first available port
             setting.setValue("port/name",port_name);//record to setting
@@ -128,14 +128,15 @@ void WeightCtrlDlg::onPortChanged(int index)
 void WeightCtrlDlg::configurePort()
 {
     ConfigDlg dlg(srl,this);//use dialog
-    dlg.exec();//execute dialog
-    const SerialConf_ptr conf = srl->getConfiguration();//get current configuration
-    QSettings setting;//prepare to record configuration into setting
-    setting.setValue("port/baudrate",conf->baudrate);//baudrate
-    setting.setValue("port/data-bit",conf->dataBit);//data bit
-    setting.setValue("port/parity",conf->checkBit);//parity
-    setting.setValue("port/stop-bit",conf->stopBit);//stop bit
-    showPortInfo();//refresh info
+    if(dlg.exec()==QDialog::Accepted) {//execute dialog
+        const SerialConf_ptr conf = srl->getConfiguration();//get current configuration
+        QSettings setting;//prepare to record configuration into setting
+        setting.setValue("port/baudrate",conf->baudrate);//baudrate
+        setting.setValue("port/data-bit",conf->dataBit);//data bit
+        setting.setValue("port/parity",conf->checkBit);//parity
+        setting.setValue("port/stop-bit",conf->stopBit);//stop bit
+        showPortInfo();//refresh info
+    }
 }
 
 void WeightCtrlDlg::controlPort()
@@ -239,12 +240,18 @@ void WeightCtrlDlg::showPortInfo()
 {
     bool is_open = srl->isOpen();//open status
     const SerialConf_ptr conf = srl->getConfiguration();//get configuration
-    ui->ledPort->setValue(is_open?LED_OK:LED_CLOSE);//LED
-    ui->labelStatus->setText(tr("%1, %2, baudrate: %3, data bit: %4, parity: %5, stop bit: %6")
-                             .arg(conf->name).arg(is_open?tr("on"):tr("off"))
-                             .arg(conf->baudrate).arg(conf->dataBit)
-                             .arg(SerialInterface::interpreteParity(conf->checkBit))
-                             .arg(SerialInterface::interpreteStopBit(conf->stopBit)));//show status label
+    if(conf->name.isEmpty()) {//check name
+        ui->ledPort->disable();//disable LED
+        ui->labelStatus->setText(tr("Port unspecified"));//status
+    }
+    else {
+        ui->ledPort->setValue(is_open?LED_OK:LED_CLOSE);//LED
+        ui->labelStatus->setText(tr("%1, %2, baudrate: %3, data bit: %4, parity: %5, stop bit: %6")
+                                 .arg(conf->name).arg(is_open?tr("on"):tr("off"))
+                                 .arg(conf->baudrate).arg(conf->dataBit)
+                                 .arg(SerialInterface::interpreteParity(conf->checkBit))
+                                 .arg(SerialInterface::interpreteStopBit(conf->stopBit)));//show status label
+    }
 }
 
 void WeightCtrlDlg::onPortError(QString err)
