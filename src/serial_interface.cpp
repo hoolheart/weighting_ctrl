@@ -5,8 +5,8 @@ SerialInterface::SerialInterface(QObject *parent) : QObject(parent)
     //prepare configuration
     conf = SerialConf_ptr(new SerialConf());
     //prepare buffers
-    txBuf = new unsigned char(CONTROL_COMMAND_LEN);
-    rxBuf = new unsigned char(RECEIVE_MESSAGE_LEN);
+    txBuf.resize(CONTROL_COMMAND_LEN);
+    rxBuf.resize(RECEIVE_MESSAGE_LEN);
     //prepare check timer
     connect(&chkTimer,SIGNAL(timeout()),this,SLOT(checkStatus()));
     chkTimer.start(1000);
@@ -17,8 +17,8 @@ SerialInterface::~SerialInterface()
     if(port && port->isOpen()) {
         port->close();//close serial port if it has been open
     }
-    delete txBuf;//release transmit buffer
-    delete rxBuf;//release receive buffer
+    //delete txBuf;//release transmit buffer
+    //delete rxBuf;//release receive buffer
 }
 
 QString SerialInterface::lastError() const
@@ -108,8 +108,8 @@ bool SerialInterface::sendCommand(const ControlCommand_ptr cmd)
 {
     if(cmd) {//check command
         if(isOpen()) {//check port status
-            cmd->serializeToByteArray(txBuf);//serial command
-            if(port->write((char*)txBuf,CONTROL_COMMAND_LEN)!=CONTROL_COMMAND_LEN) {
+            cmd->serializeToByteArray((unsigned char*)txBuf.data());//serial command
+            if(port->write(txBuf.data(),CONTROL_COMMAND_LEN)!=CONTROL_COMMAND_LEN) {
                 err = tr("Failed to write command via serial port");//fill error
                 return false;
             }
@@ -182,6 +182,7 @@ QString SerialInterface::interpreteStopBit(int stop_bit)
 void SerialInterface::onDataAvailable()
 {
     static unsigned char ch = 0;//prepare char
+    unsigned char *pBuffer = (unsigned char*)rxBuf.data();
     if(!isOpen()) {//check port status first
         return;
     }
@@ -195,53 +196,53 @@ void SerialInterface::onDataAvailable()
         if(rxIndex==0) {
             //head
             if(ch==0x5a) {//check value
-                rxBuf[rxIndex++] = ch;//record
+                pBuffer[rxIndex++] = ch;//record
             }
         }
         else if(rxIndex==1) {
             //node
             if((ch>=0x1) && (ch<0xfe)) {//check value
-                rxBuf[rxIndex++] = ch;//record
+                pBuffer[rxIndex++] = ch;//record
             }
             else {//restart
                 rxIndex = 0;
             }
             if(ch==0x5a) {//check head
-                rxBuf[rxIndex++] = ch;//record
+                pBuffer[rxIndex++] = ch;//record
             }
         }
         else if(rxIndex==2) {
             //length
             if(ch==0x09) {//check value
-                rxBuf[rxIndex++] = ch;//record
+                pBuffer[rxIndex++] = ch;//record
             }
             else {//restart
                 rxIndex = 0;
             }
             if(ch==0x5a) {//check head
-                rxBuf[rxIndex++] = ch;//record
+                pBuffer[rxIndex++] = ch;//record
             }
         }
         else if(rxIndex<12) {
             //data
-            rxBuf[rxIndex++] = ch;//record
+            pBuffer[rxIndex++] = ch;//record
         }
         else {
             //tail
             if(ch==0xff) {//check value
-                rxBuf[rxIndex++] = ch;//record
+                pBuffer[rxIndex++] = ch;//record
             }
             else {//restart
                 rxIndex = 0;
             }
             if(ch==0x5a) {//check head
-                rxBuf[rxIndex++] = ch;//record
+                pBuffer[rxIndex++] = ch;//record
             }
         }
         if(rxIndex==RECEIVE_MESSAGE_LEN) {
             //received a complete message
             ReceivedMessage_ptr msg(new ReceivedMessage());//create a new message
-            msg->parseFromByteArray(rxBuf);//parse data
+            msg->parseFromByteArray(pBuffer);//parse data
             messages.append(msg);//append to list
             emit messageReceived();//emit signal
         }

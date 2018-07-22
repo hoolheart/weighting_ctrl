@@ -143,92 +143,92 @@
         <translation>无效的停止位设置</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="274"/>
+        <location filename="serial_interface.cpp" line="275"/>
         <source>Bytes written to serial port are more than sent commands</source>
         <translation>从串口发送出的数据长度超过了应该发出的命令</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="279"/>
+        <location filename="serial_interface.cpp" line="280"/>
         <source>Too many pending bytes (%1) to write, the serial port may has been down</source>
         <translation>未发送的字节过多（%1），串口可能已经中断</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="297"/>
+        <location filename="serial_interface.cpp" line="298"/>
         <source>The port %1 is not available</source>
         <translation>串口（%1）无效</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="310"/>
+        <location filename="serial_interface.cpp" line="311"/>
         <source>The baud rate %1 is not a standard baud rate</source>
         <translation>波特率设置（%1）无效</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="315"/>
+        <location filename="serial_interface.cpp" line="316"/>
         <source>Invalid setting to parity</source>
         <translation>校验设置无效</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="320"/>
+        <location filename="serial_interface.cpp" line="321"/>
         <source>Invalid setting to data bits</source>
         <translation>数据位设置无效</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="325"/>
+        <location filename="serial_interface.cpp" line="326"/>
         <source>Invalid setting to stop bits</source>
         <translation>停止位设置无效</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="336"/>
+        <location filename="serial_interface.cpp" line="337"/>
         <source>No error</source>
         <translation>无错误</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="338"/>
+        <location filename="serial_interface.cpp" line="339"/>
         <source>Serial port is not found</source>
         <translation>串口未被找到</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="340"/>
+        <location filename="serial_interface.cpp" line="341"/>
         <source>Serial port has been used or user don&apos;t has enough permission</source>
         <translation>串口被占用，或用户没有足够的权限</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="342"/>
+        <location filename="serial_interface.cpp" line="343"/>
         <source>Failed to open serial port</source>
         <translation>无法打开串口</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="344"/>
+        <location filename="serial_interface.cpp" line="345"/>
         <source>Serial port has not been open</source>
         <translation>串口还未被打开</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="346"/>
+        <location filename="serial_interface.cpp" line="347"/>
         <source>An I/O error occurred while writing the data</source>
         <translation>在写数据过程中出现 IO 错误</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="348"/>
+        <location filename="serial_interface.cpp" line="349"/>
         <source>An I/O error occurred while reading the data</source>
         <translation>在读数据过程中出现 IO 错误</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="350"/>
+        <location filename="serial_interface.cpp" line="351"/>
         <source>Serial port becomes unavailable</source>
         <translation>串口变为无效</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="352"/>
+        <location filename="serial_interface.cpp" line="353"/>
         <source>The operation is not supported</source>
         <translation>不支持的操作</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="354"/>
+        <location filename="serial_interface.cpp" line="355"/>
         <source>The operation times out</source>
         <translation>操作超时</translation>
     </message>
     <message>
-        <location filename="serial_interface.cpp" line="358"/>
+        <location filename="serial_interface.cpp" line="359"/>
         <source>Unknown or obsolete error code %1</source>
         <translation>未知的错误代码：%1</translation>
     </message>
@@ -282,7 +282,7 @@
     </message>
     <message>
         <location filename="weight_ctrl_dlg.ui" line="252"/>
-        <location filename="weight_ctrl_dlg.cpp" line="104"/>
+        <location filename="weight_ctrl_dlg.cpp" line="105"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
@@ -317,96 +317,113 @@
         <translation>停止读数</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="31"/>
+        <location filename="weight_ctrl_dlg.cpp" line="32"/>
         <source>No available serial port</source>
         <translation>无有效串口</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="95"/>
+        <location filename="weight_ctrl_dlg.cpp" line="96"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="118"/>
+        <location filename="weight_ctrl_dlg.cpp" line="119"/>
         <source>Failed to configure:
 %1</source>
         <translation>配置串口失败：
 %1</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="152"/>
+        <location filename="weight_ctrl_dlg.cpp" line="153"/>
         <source>Failed to control serial port:
 %1</source>
         <translation>控制串口失败：
 %1</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="169"/>
         <source>Failed to set device node:
 %1</source>
-        <translation>设置节点失败：
+        <translation type="vanished">设置节点失败：
 %1</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="180"/>
-        <location filename="weight_ctrl_dlg.cpp" line="202"/>
         <source>Failed to read data:
 %1</source>
-        <translation>读数失败：
+        <translation type="vanished">读数失败：
 %1</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="217"/>
         <source>Failed to reset data:
 %1</source>
-        <translation>置零失败：
+        <translation type="vanished">置零失败：
 %1</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="245"/>
+        <location filename="weight_ctrl_dlg.cpp" line="247"/>
         <source>Port unspecified</source>
         <translation>未指定有效串口</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="249"/>
+        <location filename="weight_ctrl_dlg.cpp" line="251"/>
         <source>%1, %2, baudrate: %3, data bit: %4, parity: %5, stop bit: %6</source>
         <translation>%1，%2，波特率：%3，数据位：%4，%5，停止位：%6</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="250"/>
+        <location filename="weight_ctrl_dlg.cpp" line="252"/>
         <source>on</source>
         <translation>已打开</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="250"/>
+        <location filename="weight_ctrl_dlg.cpp" line="252"/>
         <source>off</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="287"/>
+        <location filename="weight_ctrl_dlg.cpp" line="289"/>
         <source>Failed to set node index</source>
         <translation>设置节点失败</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="290"/>
+        <location filename="weight_ctrl_dlg.cpp" line="311"/>
+        <source>Failed to calibrate</source>
+        <translation>标定失败</translation>
+    </message>
+    <message>
+        <location filename="weight_ctrl_dlg.cpp" line="331"/>
+        <source>Port has not been open</source>
+        <translation>串口还未被打开</translation>
+    </message>
+    <message>
+        <location filename="weight_ctrl_dlg.cpp" line="220"/>
+        <location filename="weight_ctrl_dlg.cpp" line="292"/>
         <source>Failed to reset data</source>
         <translation>置零失败</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="293"/>
+        <location filename="weight_ctrl_dlg.cpp" line="165"/>
+        <source>Failed to set device node</source>
+        <translation>设置节点失败</translation>
+    </message>
+    <message>
+        <location filename="weight_ctrl_dlg.cpp" line="177"/>
+        <location filename="weight_ctrl_dlg.cpp" line="200"/>
+        <source>Failed to read data</source>
+        <translation>置零失败</translation>
+    </message>
+    <message>
+        <location filename="weight_ctrl_dlg.cpp" line="295"/>
         <source>Failed to calibrate (point: %1)</source>
         <translation>标定失败（标定点：%1）</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="296"/>
+        <location filename="weight_ctrl_dlg.cpp" line="298"/>
         <source>Invalid code 0x%1 from node %2</source>
         <translation>节点号%2的设备反馈的无效功能号0x%1</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="310"/>
         <source>Failed to calibrate:
 %1</source>
-        <translation>标定失败：
+        <translation type="vanished">标定失败：
 %1</translation>
     </message>
 </context>

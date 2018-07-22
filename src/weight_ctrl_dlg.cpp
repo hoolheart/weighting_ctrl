@@ -12,7 +12,8 @@
 
 WeightCtrlDlg::WeightCtrlDlg(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::WeightCtrlDlg)
+    ui(new Ui::WeightCtrlDlg),
+    hasCommand(false)
 {
     ui->setupUi(this);//setup UI
 
@@ -161,12 +162,9 @@ void WeightCtrlDlg::setNode()
     cmd->setNodeIndex((unsigned char)ui->spinNode->value());//node index
     cmd->setFuncCode(0x01);//func code
     //try control
-    if(srl->sendCommand(cmd)) {
+    if(sendSrlCommand(tr("Failed to set device node"))) {
         ctrlNode = (unsigned char)ui->spinNode->value();//record
         QSettings().setValue("device/node-index",ctrlNode);//save into setting
-    }
-    else {
-        QMessageBox::warning(this,windowTitle(),tr("Failed to set device node:\n%1").arg(srl->lastError()));//pump error
     }
 }
 
@@ -176,9 +174,7 @@ void WeightCtrlDlg::readData()
     cmd->setNodeIndex(ctrlNode);//node index
     cmd->setFuncCode(0x00);//func code
     //try control
-    if(!srl->sendCommand(cmd)) {
-        QMessageBox::warning(this,windowTitle(),tr("Failed to read data:\n%1").arg(srl->lastError()));//pump error
-    }
+    sendSrlCommand(tr("Failed to read data"));
 }
 
 void WeightCtrlDlg::startContinousRead()
@@ -195,14 +191,22 @@ void WeightCtrlDlg::continousRead()
 {
     if(srl->isOpen()) {//check serial port status first
         //prepare command
-        cmd->setNodeIndex(ctrlNode);//node index
-        cmd->setFuncCode(0x00);//func code
+        if(hasCommand) {
+            hasCommand = false;//clear flag
+        }
+        else {
+            cmd->setNodeIndex(ctrlNode);//node index
+            cmd->setFuncCode(0x00);//func code
+            cmdWarning = tr("Failed to read data");//warning
+        }
         //try control
         if(!srl->sendCommand(cmd)) {
-            QMessageBox::warning(this,windowTitle(),tr("Failed to read data:\n%1").arg(srl->lastError()));//pump error
+            QMessageBox::warning(this,windowTitle(),QString("%1:\n%2").arg(cmdWarning).arg(srl->lastError()));//pump error
         }
+        cmd->setWeight(0);//clear weight
     }
     else {
+        hasCommand = false;//clear flag
         readTimer.stop();//stop timer
     }
 }
@@ -213,9 +217,7 @@ void WeightCtrlDlg::reset()
     cmd->setNodeIndex(ctrlNode);//node index
     cmd->setFuncCode(0x02);//func code
     //try control
-    if(!srl->sendCommand(cmd)) {
-        QMessageBox::warning(this,windowTitle(),tr("Failed to reset data:\n%1").arg(srl->lastError()));//pump error
-    }
+    sendSrlCommand(tr("Failed to reset data"));
 }
 
 void WeightCtrlDlg::calibrate()
@@ -306,9 +308,28 @@ void WeightCtrlDlg::onCalibration(int point, double weight)
     cmd->setFuncCode((unsigned char)(4+point));//func code
     cmd->setWeight((qint32)qRound(weight));//weight
     //try control
-    if(!srl->sendCommand(cmd)) {
-        QMessageBox::warning(this,windowTitle(),tr("Failed to calibrate:\n%1").arg(srl->lastError()));//pump error
+    sendSrlCommand(tr("Failed to calibrate"));
+}
+
+bool WeightCtrlDlg::sendSrlCommand(const QString &warn)
+{
+    bool ok = false;
+    if(srl->isOpen()) {//check serial port
+        if(readTimer.isActive()) {//check read timer
+            hasCommand = true;//set flag
+            cmdWarning = warn;//record warning info
+            return true;
+        }
+        else {
+            ok = srl->sendCommand(cmd);//send command
+            if(!ok) {//warn on failure
+                QMessageBox::warning(this,windowTitle(),QString("%1:\n%2").arg(warn).arg(srl->lastError()));
+            }
+        }
     }
-    //clear weight
-    cmd->setWeight(0);
+    else {
+        QMessageBox::warning(this,windowTitle(),tr("Port has not been open"));
+    }
+    cmd->setWeight(0);//clear weight
+    return ok;
 }

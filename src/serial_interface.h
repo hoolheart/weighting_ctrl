@@ -7,6 +7,7 @@
 #include <QSerialPortInfo>
 #include <QList>
 #include <QTimer>
+#include <QByteArray>
 
 #include "data_structure.h"
 
@@ -103,7 +104,8 @@ private:
     //QScopedPointer<QSerialPortInfo> info;/**< serial port information pointer */
     QList<ReceivedMessage_ptr> messages;/**< pending message list */
 
-    unsigned char *txBuf, *rxBuf;/**< buffers */
+    //unsigned char *txBuf, *rxBuf;/**< buffers */
+    QByteArray txBuf, rxBuf;/**< bufferfs */
     int rxIndex;/**< current index of received buffer */
 
     QString err;/**< last error information */

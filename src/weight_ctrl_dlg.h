@@ -33,6 +33,8 @@ private:
     ControlCommand_ptr cmd;/**< control command to the device */
     unsigned char ctrlNode;/**< current controlling node index */
     QTimer readTimer;/**< timer to control continous reading */
+    bool hasCommand;/**< flag whether there is pending command */
+    QString cmdWarning;/**< warning if pending command failed */
 
 private slots:
     void onPortStatusChanged(bool on);//control UI status according to port status
@@ -53,6 +55,9 @@ private slots:
     void onMessageReceived();//process received message from device
 
     void onCalibration(int point,double weight);//process calibration
+
+private:
+    bool sendSrlCommand(const QString &warn=QString());//send command via serial
 };
 
 #endif // WEIGHT_CTRL_DLG_H
