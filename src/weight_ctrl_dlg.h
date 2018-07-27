@@ -42,9 +42,9 @@ private slots:
     void configurePort();//configure serial port
     void controlPort();//control serial port
     void setNode();//set node index
+    void changeReadNode();//change node index for reading
     void readData();//read data once
-    void startContinousRead();//start continuous reading of data
-    void stopContinuousRead();//stop continuous reading
+    void ctrlContinousRead(bool enabled);//control continuous reading of data
     void continousRead();//continuous read
     void reset();//reset data
     void calibrate();//calibrate device

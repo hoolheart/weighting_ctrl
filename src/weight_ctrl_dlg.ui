@@ -202,6 +202,9 @@
            <property name="text">
             <string>Cont. Read</string>
            </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
            <property name="autoDefault">
             <bool>false</bool>
            </property>
@@ -259,7 +262,7 @@
          <item row="7" column="0">
           <widget class="QPushButton" name="btnRead">
            <property name="text">
-            <string>Read</string>
+            <string>Single Read</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -276,7 +279,7 @@
          <item row="5" column="2">
           <widget class="QPushButton" name="btnNodeSet">
            <property name="text">
-            <string>Set</string>
+            <string>Set Node</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -347,9 +350,9 @@
           </widget>
          </item>
          <item row="7" column="2">
-          <widget class="QPushButton" name="btnStopRead">
+          <widget class="QPushButton" name="btnReadNode">
            <property name="text">
-            <string>Stop Read</string>
+            <string>Change Node</string>
            </property>
            <property name="autoDefault">
             <bool>false</bool>

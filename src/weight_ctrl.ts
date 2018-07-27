@@ -276,45 +276,57 @@
         <translation>循环读数</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="213"/>
+        <location filename="weight_ctrl_dlg.ui" line="216"/>
         <source>Config</source>
         <translation>配置</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="252"/>
+        <location filename="weight_ctrl_dlg.ui" line="255"/>
         <location filename="weight_ctrl_dlg.cpp" line="105"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="262"/>
-        <source>Read</source>
-        <translation>读数</translation>
+        <location filename="weight_ctrl_dlg.ui" line="265"/>
+        <source>Single Read</source>
+        <translation>单次读数</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="272"/>
+        <location filename="weight_ctrl_dlg.ui" line="282"/>
+        <source>Set Node</source>
+        <translation>设置节点</translation>
+    </message>
+    <message>
+        <location filename="weight_ctrl_dlg.ui" line="355"/>
+        <source>Change Node</source>
+        <translation>更改读数节点</translation>
+    </message>
+    <message>
+        <source>Read</source>
+        <translation type="vanished">读数</translation>
+    </message>
+    <message>
+        <location filename="weight_ctrl_dlg.ui" line="275"/>
         <source>Port Select</source>
         <translation>串口选择</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="279"/>
         <source>Set</source>
-        <translation>设置节点</translation>
+        <translation type="vanished">设置节点</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="289"/>
+        <location filename="weight_ctrl_dlg.ui" line="292"/>
         <source>Node Select</source>
         <translation>节点选择</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="296"/>
+        <location filename="weight_ctrl_dlg.ui" line="299"/>
         <source>Port Status</source>
         <translation>串口状态</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.ui" line="352"/>
         <source>Stop Read</source>
-        <translation>停止读数</translation>
+        <translation type="vanished">停止读数</translation>
     </message>
     <message>
         <location filename="weight_ctrl_dlg.cpp" line="32"/>
@@ -359,43 +371,43 @@
 %1</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="247"/>
+        <location filename="weight_ctrl_dlg.cpp" line="257"/>
         <source>Port unspecified</source>
         <translation>未指定有效串口</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="251"/>
+        <location filename="weight_ctrl_dlg.cpp" line="261"/>
         <source>%1, %2, baudrate: %3, data bit: %4, parity: %5, stop bit: %6</source>
         <translation>%1，%2，波特率：%3，数据位：%4，%5，停止位：%6</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="252"/>
+        <location filename="weight_ctrl_dlg.cpp" line="262"/>
         <source>on</source>
         <translation>已打开</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="252"/>
+        <location filename="weight_ctrl_dlg.cpp" line="262"/>
         <source>off</source>
         <translation>关闭</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="289"/>
+        <location filename="weight_ctrl_dlg.cpp" line="299"/>
         <source>Failed to set node index</source>
         <translation>设置节点失败</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="311"/>
+        <location filename="weight_ctrl_dlg.cpp" line="321"/>
         <source>Failed to calibrate</source>
         <translation>标定失败</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="331"/>
+        <location filename="weight_ctrl_dlg.cpp" line="341"/>
         <source>Port has not been open</source>
         <translation>串口还未被打开</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="220"/>
-        <location filename="weight_ctrl_dlg.cpp" line="292"/>
+        <location filename="weight_ctrl_dlg.cpp" line="228"/>
+        <location filename="weight_ctrl_dlg.cpp" line="302"/>
         <source>Failed to reset data</source>
         <translation>置零失败</translation>
     </message>
@@ -405,18 +417,18 @@
         <translation>设置节点失败</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="177"/>
-        <location filename="weight_ctrl_dlg.cpp" line="200"/>
+        <location filename="weight_ctrl_dlg.cpp" line="183"/>
+        <location filename="weight_ctrl_dlg.cpp" line="207"/>
         <source>Failed to read data</source>
         <translation>置零失败</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="295"/>
+        <location filename="weight_ctrl_dlg.cpp" line="305"/>
         <source>Failed to calibrate (point: %1)</source>
         <translation>标定失败（标定点：%1）</translation>
     </message>
     <message>
-        <location filename="weight_ctrl_dlg.cpp" line="298"/>
+        <location filename="weight_ctrl_dlg.cpp" line="308"/>
         <source>Invalid code 0x%1 from node %2</source>
         <translation>节点号%2的设备反馈的无效功能号0x%1</translation>
     </message>

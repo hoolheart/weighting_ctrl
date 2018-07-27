@@ -50,9 +50,9 @@ WeightCtrlDlg::WeightCtrlDlg(QWidget *parent) :
     connect(ui->btnPortConfig,SIGNAL(clicked(bool)),this,SLOT(configurePort()));//configure button
     connect(ui->btnPortCtrl,SIGNAL(clicked(bool)),this,SLOT(controlPort()));//control button
     connect(ui->btnNodeSet,SIGNAL(clicked(bool)),this,SLOT(setNode()));//set node button
+    connect(ui->btnReadNode,SIGNAL(clicked(bool)),this,SLOT(changeReadNode()));//change reading node
     connect(ui->btnRead,SIGNAL(clicked(bool)),this,SLOT(readData()));//read button
-    connect(ui->btnContRead,SIGNAL(clicked(bool)),this,SLOT(startContinousRead()));//continous read button
-    connect(ui->btnStopRead,SIGNAL(clicked(bool)),this,SLOT(stopContinuousRead()));//stop read button
+    connect(ui->btnContRead,SIGNAL(clicked(bool)),this,SLOT(ctrlContinousRead(bool)));//continous read button
     connect(ui->btnReset,SIGNAL(clicked(bool)),this,SLOT(reset()));//reset button
     connect(ui->btnCalibrate,SIGNAL(clicked(bool)),this,SLOT(calibrate()));//calibrate button
     connect(ui->btnHelp,SIGNAL(clicked(bool)),this,SLOT(help()));//help button
@@ -84,7 +84,7 @@ void WeightCtrlDlg::onPortStatusChanged(bool on)
 {
     static QList<QWidget*> cfgUIs = QList<QWidget*>()<<ui->comboPort<<ui->btnPortConfig;//configure UI list
     static QList<QWidget*> wrkUIs = QList<QWidget*>()<<ui->spinNode<<ui->btnNodeSet
-                                                     <<ui->btnRead<<ui->btnContRead<<ui->btnStopRead
+                                                     <<ui->btnRead<<ui->btnContRead<<ui->btnReadNode
                                                      <<ui->btnReset<<ui->btnCalibrate;//working UI list
     if(on) {//serial port on
         foreach (QWidget *wnd, cfgUIs) {
@@ -168,6 +168,12 @@ void WeightCtrlDlg::setNode()
     }
 }
 
+void WeightCtrlDlg::changeReadNode()
+{
+    ctrlNode = (unsigned char)ui->spinNode->value();//record
+    QSettings().setValue("device/node-index",ctrlNode);//save into setting
+}
+
 void WeightCtrlDlg::readData()
 {
     //prepare command
@@ -177,14 +183,15 @@ void WeightCtrlDlg::readData()
     sendSrlCommand(tr("Failed to read data"));
 }
 
-void WeightCtrlDlg::startContinousRead()
+void WeightCtrlDlg::ctrlContinousRead(bool enabled)
 {
-    readTimer.start();
-}
-
-void WeightCtrlDlg::stopContinuousRead()
-{
-    readTimer.stop();
+    //control read timer
+    if(enabled) {
+        readTimer.start();
+    }
+    else {
+        readTimer.stop();
+    }
 }
 
 void WeightCtrlDlg::continousRead()
@@ -208,6 +215,7 @@ void WeightCtrlDlg::continousRead()
     else {
         hasCommand = false;//clear flag
         readTimer.stop();//stop timer
+        ui->btnContRead->setChecked(false);//uncheck button
     }
 }
 
@@ -223,7 +231,9 @@ void WeightCtrlDlg::reset()
 void WeightCtrlDlg::calibrate()
 {
     bool stop_read = !readTimer.isActive();//check continuous reading
-    readTimer.start();//start continous reading
+    if(stop_read) {
+        readTimer.start();//start continous reading
+    }
     CalibrationDlg dlg(this);//use dialog
     connect(&dlg,SIGNAL(calibration(int,double)),this,SLOT(onCalibration(int,double)));//process calibration
     connect(this,SIGNAL(adValueReceived(qint32)),&dlg,SLOT(showADValue(qint32)));//show AD value
