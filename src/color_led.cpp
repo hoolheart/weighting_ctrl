@@ -24,8 +24,8 @@ void ColorLED::build(QVariantHash &a)/**< build UI with attributes */
     bool useful = false;
     for(QVariantHash::Iterator i=a.begin();i!=a.end();i++) {
         if(attr.contains(i.key())) {//check key
-            if(i->type()==attr[i.key()].type()) {//check type
-                attr.insert(i.key(),i.value());//insert attribute
+            if(i->typeId()==attr[i.key()].typeId()) {//check type
+                attr.insert(i.key(), i.value());//insert attribute
                 useful = true;
             }
         }
